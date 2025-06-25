@@ -13,9 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.dao.UserDAO;
 import model.dto.UserDTO;
-import utils.CUtils;
 import utils.HashUtils;
-import utils.UserUtils;
 import utils.ValidationUtils;
 
 /**
@@ -94,15 +92,12 @@ public class UserController extends HttpServlet {
     }
 
     private String handleLogin(HttpServletRequest request, HttpServletResponse response) {
-        if(UserUtils.isLoggedIn(request)){
-            return WELCOME_PAGE;
-        }
-        
         String username = request.getParameter("strUserName");
         String password = request.getParameter("strPassword");
         
         if(ValidationUtils.isNullOrEmpty(username) || ValidationUtils.isNullOrEmpty(password)){
-            return CUtils.error(request, "Please fill in all the input parameters.");
+            request.setAttribute("errorMsg", "Please fill in all the input parameters.");
+            return USER_FORM_PAGE;
         }
         
         UserDTO user = UDAO.getFirst("Username = ? AND Password = ?", username, HashUtils.hashPassword(password));
@@ -118,10 +113,8 @@ public class UserController extends HttpServlet {
     }
 
     private String handleLogout(HttpServletRequest request, HttpServletResponse response) {
-        if(UserUtils.isLoggedIn(request)){
-            HttpSession session = request.getSession();
-            session.invalidate();
-        }
+        HttpSession session = request.getSession();
+        session.invalidate();
         request.setAttribute("actionType", "login");
         return USER_FORM_PAGE;
     }

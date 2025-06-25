@@ -135,7 +135,11 @@ public class ProjectController extends HttpServlet {
         }
         
         if(date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now())){
-            return CUtils.error(request, "Date must be in the future!");
+            request.setAttribute("inputProjectName", projectName);
+            request.setAttribute("inputDescription", description);
+            request.setAttribute("actionType", "createProject");
+            request.setAttribute("errorMsg", "Date must be in the future!");
+            return PROJECT_FORM_PAGE;
         }
         
         PDAO.create(new ProjectDTO(projectName, description, date));

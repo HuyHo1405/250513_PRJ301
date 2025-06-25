@@ -153,11 +153,6 @@
     </head>
     <body>
         <%
-            if(!UserUtils.isLoggedIn(request)){
-                response.sendRedirect("user-form.jsp");
-                return;
-            }
-            
             boolean isFounder = UserUtils.isFounder(request);
         %>
         

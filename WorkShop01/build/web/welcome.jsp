@@ -81,13 +81,6 @@
         </style>
     </head>
     <body>
-        <%
-            if(!UserUtils.isLoggedIn(request)){
-                response.sendRedirect("user-form.jsp");
-                return;
-            }
-        %>
-        
         <div class="top-bar">
             <h1>Hello, ${sessionScope.user.name}</h1>
             <div>

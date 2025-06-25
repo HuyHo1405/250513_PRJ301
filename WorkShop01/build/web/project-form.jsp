@@ -133,20 +133,21 @@
                 background-color: #E04E2D;
             }
 
+            /* Error message styling */
+            .error-message {
+                color: #dc3545; /* Bootstrap's red color for errors */
+                background-color: #f8d7da; /* Light red background */
+                border: 1px solid #f5c6cb;
+                padding: 10px 15px;
+                border-radius: 4px;
+                margin-top: 10px;
+                font-size: 0.95em;
+            }
+
         </style>
     </head>
     <body>
         <%
-            if(!UserUtils.isLoggedIn(request)){
-                response.sendRedirect("user-form.jsp");
-                return;
-            }
-            
-            if(!UserUtils.isFounder(request)){
-                response.sendRedirect("welcome.jsp");
-                return;
-            }
-            
             String action = (String) request.getAttribute("actionType");
             if(action == null || action.isEmpty()){
                 response.sendRedirect("welcome.jsp");
@@ -155,6 +156,12 @@
             
             String keyword = (String) request.getAttribute("strKeyword");
             if(keyword == null) keyword = "";
+            
+            String inputProjectName = (String) request.getAttribute("inputProjectName");
+            if(inputProjectName == null) inputProjectName = "";
+            
+            String inputDescription = (String) request.getAttribute("inputDescription");
+            if(inputDescription == null) inputDescription = "";
             
             String name = "";
             if (action.equals("createProject")) {
@@ -166,6 +173,9 @@
             }
             
             ProjectDTO project = (ProjectDTO) request.getAttribute("project");
+            if(project == null){
+                project = new ProjectDTO(inputProjectName, inputDescription, null);
+            }
         %>
     
         <div class="top-bar">
@@ -202,7 +212,7 @@
                 <label>
                     <span>Status</span>
                     <select name="strProjectStatus">
-                        <option value="Ideation" <%= project != null && "Ideation".equals(project.getStatus()) ? "selected" : "" %>>Ideation</option>
+                        <option value="Ideation" <%= project != null && "Ideation"  .equals(project.getStatus()) ? "selected" : "" %>>Ideation</option>
                         <option value="Development" <%= project != null && "Development".equals(project.getStatus()) ? "selected" : "" %>>Development</option>
                         <option value="Launch" <%= project != null && "Launch".equals(project.getStatus()) ? "selected" : "" %>>Launch</option>
                         <option value="Scaling" <%= project != null && "Scaling".equals(project.getStatus()) ? "selected" : "" %>>Scaling</option>
@@ -213,11 +223,15 @@
                 <label>
                     <span>Estimated Launch Date</span>
                     <input type="date" name="strEstimatedLaunchDate"
-                            value="<%= project != null ? project.getEstimatedLaunchDate() : "" %>" 
+                            value="<%= (project != null && project.getEstimatedLaunchDate() != null) ? project.getEstimatedLaunchDate() : "" %>" 
                             <%= action.equals("updateProjectStatus") ? "readonly" : "" %> />
                 </label>
+                
+                <c:if test="${not empty errorMsg}">
+                    <div class="error-message">${errorMsg}</div>
+                </c:if>
 
-                <button type="submit" class="submit-button">Submit</button>
+                <button type="submit" class="submit-button">Submit</button> 
             </form>
         </div>
     </body>
