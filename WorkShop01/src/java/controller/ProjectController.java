@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import model.dao.ProjectDAO;
 import model.dto.ProjectDTO;
 import utils.CUtils;
-import utils.UserUtils;
 import utils.ValidationUtils;
 
 /**
@@ -28,9 +27,9 @@ public class ProjectController extends HttpServlet {
     public static final String ERROR_PAGE = "error.jsp";
     public static final String PROJECT_MANAGEMENT_PAGE = "project-management.jsp";
     public static final String PROJECT_FORM_PAGE = "project-form.jsp";
-    
+
     private static final ProjectDAO PDAO = new ProjectDAO();
-    
+
     //doGet, doPost & process
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -70,30 +69,30 @@ public class ProjectController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String url = "";
         try {
             String action = request.getParameter("action");
-            if(action.equals("toProjectManagement")){
+            if (action.equals("toProjectManagement")) {
                 request.setAttribute("projectList", PDAO.retrieve("1 = 1"));
                 url = PROJECT_MANAGEMENT_PAGE;
-            }else if(action.equals("toAddProject")){
+            } else if (action.equals("toAddProject")) {
                 request.setAttribute("actionType", "createProject");
                 request.setAttribute("strKeyword", request.getParameter("strKeyword"));
                 url = PROJECT_FORM_PAGE;
-            }else if(action.equals("toEditProject")){
+            } else if (action.equals("toEditProject")) {
                 url = handleToEdit(request, response);
-            }else if(action.equals("createProject")){
+            } else if (action.equals("createProject")) {
                 url = handleCreateProject(request, response);
-            }else if(action.equals("searchProjectsByName")){
+            } else if (action.equals("searchProjectsByName")) {
                 url = handleSearch(request, response);
-            }else if(action.equals("updateProjectStatus")){
+            } else if (action.equals("updateProjectStatus")) {
                 url = handleUpdateStatus(request, response);
-            }else {
+            } else {
                 url = ERROR_PAGE;
             }
         } catch (Exception e) {
@@ -105,18 +104,18 @@ public class ProjectController extends HttpServlet {
 
     private String handleSearch(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("strName");
-        if(name == null){
+        if (name == null) {
             request.setAttribute("errorMsg", "Keyword not found");
             return PROJECT_MANAGEMENT_PAGE;
         }
-        
+
         request.setAttribute("projectList", PDAO.retrieve("project_name LIKE ?", "%" + name + "%"));
         return PROJECT_MANAGEMENT_PAGE;
     }
 
     private String handleToEdit(HttpServletRequest request, HttpServletResponse response) {
         int projectId = CUtils.toInt(request.getParameter("projectId"));
-        if(ValidationUtils.isInvalidId(projectId)){
+        if (ValidationUtils.isInvalidId(projectId)) {
             return CUtils.error(request, "Invalid Project ID.");
         }
         request.setAttribute("strKeyword", request.getParameter("strKeyword"));
@@ -129,22 +128,21 @@ public class ProjectController extends HttpServlet {
         String projectName = request.getParameter("strProjectName");
         String description = request.getParameter("strDescription");
         LocalDate date = LocalDate.parse(request.getParameter("strEstimatedLaunchDate"));
-        
-        if(ValidationUtils.isNullOrEmpty(projectName) || ValidationUtils.isNullOrEmpty(description)){
+
+        if (ValidationUtils.isNullOrEmpty(projectName) || ValidationUtils.isNullOrEmpty(description)) {
             return CUtils.error(request, "Empty input data!");
         }
-        
-        if(date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now())){
+
+        if (date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now())) {
             request.setAttribute("inputProjectName", projectName);
             request.setAttribute("inputDescription", description);
             request.setAttribute("actionType", "createProject");
             request.setAttribute("errorMsg", "Date must be in the future!");
             return PROJECT_FORM_PAGE;
         }
-        
+
         PDAO.create(new ProjectDTO(projectName, description, date));
-        request.setAttribute("projectList", PDAO.retrieve("1 = 1"));
-        return PROJECT_MANAGEMENT_PAGE;
+        return handleSearch(request, response);
     }
 
     private String handleUpdateStatus(HttpServletRequest request, HttpServletResponse response) {
@@ -153,20 +151,14 @@ public class ProjectController extends HttpServlet {
         String description = request.getParameter("strDescription");
         String status = request.getParameter("strProjectStatus");
         LocalDate date = LocalDate.parse(request.getParameter("strEstimatedLaunchDate"));
-        
-        if(ValidationUtils.isNullOrEmpty(projectName) || ValidationUtils.isNullOrEmpty(description)
-                || ValidationUtils.isNullOrEmpty(status) || ValidationUtils.isInvalidId(projectId)){
+
+        if (ValidationUtils.isNullOrEmpty(projectName) || ValidationUtils.isNullOrEmpty(description)
+                || ValidationUtils.isNullOrEmpty(status) || ValidationUtils.isInvalidId(projectId)) {
             return CUtils.error(request, "Empty input data!");
         }
-        
-        if(date.isBefore(LocalDate.now()) || date.isEqual(LocalDate.now())){
-            return CUtils.error(request, "Date must be in the future!");
-        }
-        
+
         PDAO.update(new ProjectDTO(projectId, projectName, description, status, date));
-        request.setAttribute("projectList", PDAO.retrieve("1 = 1"));
-        return PROJECT_MANAGEMENT_PAGE;
+        return handleSearch(request, response);
     }
-    
 
 }

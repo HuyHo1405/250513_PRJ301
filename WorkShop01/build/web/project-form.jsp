@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page import="utils.UserUtils"%>
 <%@page import="model.dto.ProjectDTO"%>
+<%@page import="java.time.LocalDate"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -148,6 +150,16 @@
     </head>
     <body>
         <%
+            if(!UserUtils.isLoggedIn(request)){
+                response.sendRedirect("user-form.jsp");
+                return;
+            }
+            
+            if(!UserUtils.isFounder(request)){
+                response.sendRedirect("welcome.jsp");
+                return;
+            }
+            
             String action = (String) request.getAttribute("actionType");
             if(action == null || action.isEmpty()){
                 response.sendRedirect("welcome.jsp");
@@ -182,6 +194,7 @@
             <h1><%= name %> Form</h1>
             <form action="MainController" method="post">
                 <input type="hidden" name="action" value="toProjectManagement"/>
+                <input type="hidden" name="strName" value="${not empty param.strName ? param.strName : ''}"/>
                 <button type="submit" class="back-button">Back to Projects</button>
             </form>
         </div>
@@ -190,6 +203,7 @@
             <hr>
             <form action="MainController" method="post">
                 <input type="hidden" name="action" value="<%= action %>"/>
+                <input type="hidden" name="strName" value="${not empty param.strName ? param.strName : ''}"/>
                 
                 <% if(!action.equals("createProject")) {%>
                 <label>
@@ -223,6 +237,7 @@
                 <label>
                     <span>Estimated Launch Date</span>
                     <input type="date" name="strEstimatedLaunchDate"
+                           required min="<%= LocalDate.now().plusDays(1) %>"
                             value="<%= (project != null && project.getEstimatedLaunchDate() != null) ? project.getEstimatedLaunchDate() : "" %>" 
                             <%= action.equals("updateProjectStatus") ? "readonly" : "" %> />
                 </label>

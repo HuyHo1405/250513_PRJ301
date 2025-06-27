@@ -172,13 +172,16 @@
 
                 <form action="MainController" method="post" style="display:inline-block;">
                     <input type="hidden" name="action" value="toAddProject"/>
+                    <input type="hidden" name="strName" value="${not empty param.strName ? param.strName : ''}"/>
                     <button type="submit" class="add-project-button">+ Add Project</button>
                 </form>
             <% } %>
             
             <table border="0">
                 <thead> <tr>
-                        <th>ID</th>
+                        <th>
+                            <%= isFounder? "Id": "Ord"%>
+                        </th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Status</th>
@@ -188,9 +191,15 @@
                         <% } %>
                     </tr>
                 </thead>
-                <tbody> <c:forEach var="p" items="${projectList}">
+                <tbody> <c:forEach var="p" items="${projectList}" varStatus="loop">
                         <tr>
-                            <td>${p.projectId}</td> 
+                            <td>
+                                <% if(isFounder){ %>
+                                    ${p.projectId}
+                                <% } else { %>
+                                    ${loop.index + 1}
+                                <% } %>
+                            </td>
                             <td>${p.projectName}</td> 
                             <td>${p.description}</td> 
                             <td>${p.status}</td> 
@@ -199,6 +208,7 @@
                                 <td>
                                     <form action="MainController" method="post" style="display:inline;">
                                         <input type="hidden" name="action" value="toEditProject"/>
+                                        <input type="hidden" name="strName" value="${not empty param.strName ? param.strName : ''}"/>
                                         <input type="hidden" name="projectId" value="${p.projectId}"/>
                                         <button type="submit" class="edit-project-button">Edit</button>
                                     </form>
