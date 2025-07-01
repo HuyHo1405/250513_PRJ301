@@ -1,0 +1,184 @@
+            /* Reset some default browser styles */
+            * {
+                box-sizing: border-box;
+            }
+
+            /* General Body Styling (tương tự như login form) */
+            body {
+                font-family: 'Inter', sans-serif; /* Sử dụng Inter cho font chữ chung */
+                background-color: #1a1a1a; /* Nền rất tối */
+                display: flex;
+                flex-direction: column; /* Sắp xếp các phần tử theo cột */
+                align-items: flex-start; /* Căn lề trái */
+                min-height: 100vh;
+                margin: 0;
+                color: #f0f0f0; /* Màu chữ tổng thể là trắng nhạt */
+                overflow-x: hidden; /* Đảm bảo không có scrollbar ngang */
+                padding: 0; /* body không còn padding nữa */
+                position: relative;
+            }
+
+            /* Block #1: Header Container (WELCOME, NGUYEN VAN A + Log out) */
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%; /* Chiếm toàn bộ chiều rộng của body */
+                background-color: #2e2e2e; /* MÀU NỀN CỦA KHỐI THỨ NHẤT */
+                padding: 20px 50px; /* Padding cho khối header (top/bottom và left/right) */
+                border-bottom: none; /* Không border dưới nữa vì sẽ có horizontal-line riêng */
+            }
+
+            h1 {
+                font-family: 'Bebas Neue', sans-serif;
+                color: #f0f0f0;
+                margin: 0;
+                font-size: 3em;
+                font-weight: 700;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                text-align: left;
+                line-height: 1.2;
+            }
+
+            /* Styles for the Logout button */
+            .btn-logout {
+                padding: 12px 25px;
+                font-size: 1em;
+                min-width: unset;
+                flex-grow: 0;
+                line-height: normal;
+                background-color: #f0f0f0; /* Màu nền trắng */
+                color: #f26225; /* CHANGED: Màu chữ cam */
+                font-weight: bold; /* CHANGED: Chữ in đậm */
+                border: 1px solid #f0f0f0; /* Border màu trắng */
+                border-radius: 0; /* Giữ góc vuông */
+                cursor: pointer;
+                transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+                box-shadow: 0 4px 15px rgba(240, 240, 240, 0.3); /* Shadow nhẹ nhàng */
+            }
+
+            .btn-logout:hover {
+                background-color: #d1d1d1; /* Hơi xám khi hover */
+                color: #d15620; /* CHANGED: Màu cam đậm hơn khi hover */
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(240, 240, 240, 0.5); /* Shadow mạnh hơn khi hover */
+            }
+
+            /* Horizontal Line style - Dưới header, có màu border */
+            .horizontal-line {
+                width: 100%; /* Kéo dài hết chiều rộng */
+                height: 1px; /* Độ dày của đường kẻ */
+                background-color: transparent; /* Nền trong suốt */
+                border-bottom: 1px solid #4a4a4a; /* Border dưới */
+                margin-bottom: 25px; /* Khoảng cách từ đường kẻ đến khối nội dung dưới */
+            }
+
+            /* Container for buttons */
+            .buttons-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 1px; /* 1px khoảng cách giữa các nút */
+                margin-left: 50px; /* Căn chỉnh với header */
+                margin-bottom: 0; /* Loại bỏ margin dưới để dính vào khối border */
+            }
+
+            /* Block #3: Bottom Content Container (new bordered block) */
+            .bottom-content-container {
+                width: 100%;
+                max-width: calc(100% - 100px); /* Căn chỉnh với các khối khác */
+                margin-left: 50px; /* Căn chỉnh với các khối khác */
+                margin-right: 50px; /* Căn chỉnh với các khối khác */
+                margin-top: 0; /* Đảm bảo không có margin trên để dính vào khối phía trên */
+                margin-bottom: 25px; /* Margin ở cuối trang */
+                border: 1px solid #4a4a4a; /* Cùng kiểu border */
+                background-color: transparent;
+                flex-grow: 1; /* Khối này sẽ mở rộng để lấp đầy không gian dọc còn lại */
+            }
+
+            /* Button Styling (for orange buttons) */
+            .btn {
+                display: inline-block;
+                padding: 15px 30px;
+                font-size: 1.2em;
+                font-weight: 700;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 0;
+                cursor: pointer;
+                transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+                border: none; /* Các nút cam không có border */
+                flex-grow: 0; /* Ngăn các nút mở rộng quá mức */
+                min-width: 180px; /* Chiều rộng tối thiểu của nội dung nút */
+            }
+
+            .btn-primary {
+                background: linear-gradient(135deg, #f26225 0%, #d15620 100%);
+                color: white;
+                box-shadow: 0 4px 15px rgba(242, 98, 37, 0.3);
+            }
+
+            .btn-primary:hover {
+                background: linear-gradient(135deg, #d15620 0%, #f26225 100%);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(242, 98, 37, 0.5);
+            }
+
+            /* Responsive Adjustments */
+            @media (max-width: 768px) {
+                /* Header container responsive */
+                .header-container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding: 15px 20px;
+                }
+                h1 {
+                    font-size: 2em;
+                    margin-bottom: 10px;
+                }
+                .logout-form {
+                    width: 100%;
+                    text-align: right;
+                    margin-top: 5px;
+                }
+                .logout-form form {
+                    display: inline-block;
+                }
+                /* Apply mobile adjustments to .btn-logout */
+                .btn-logout {
+                    padding: 8px 15px;
+                    font-size: 0.8em;
+                }
+
+                /* Responsive for horizontal-line */
+                .horizontal-line {
+                    margin-bottom: 15px;
+                }
+
+                /* Responsive for buttons-container */
+                .buttons-container {
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-bottom: 0;
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 1px;
+                }
+
+                /* Responsive for bottom-content-container */
+                .bottom-content-container {
+                    max-width: calc(100% - 40px);
+                    margin-left: 20px;
+                    margin-right: 20px;
+                    margin-top: 0;
+                    margin-bottom: 15px;
+                }
+
+                .btn {
+                    font-size: 1em;
+                    padding: 12px 20px;
+                    width: 100%; /* Nút đầy đủ chiều rộng trên di động */
+                    min-width: unset;
+                }
+            }

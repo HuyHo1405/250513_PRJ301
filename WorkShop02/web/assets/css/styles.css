@@ -1,0 +1,184 @@
+/* base.css */
+
+/* Reset some default browser styles */
+* {
+    box-sizing: border-box;
+}
+
+/* Autofill input styles for Webkit browsers */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important; /* Your input background color */
+    -webkit-text-fill-color: #f0f0f0 !important; /* Your text color */
+    transition: background-color 5000s ease-in-out 0s; /* Prevent flickering */
+}
+
+/* General Body Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #1a1a1a; /* Very dark background */
+    color: #f0f0f0; /* Overall light text color */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    /* Common body layout for welcome, exam-category, result, exam, exam-management, exam-form */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+}
+
+/* Header Container - Common for multiple pages */
+.header-container {
+    display: flex;
+    justify-content: flex-start; /* Align to the left */
+    align-items: center;
+    width: 100%;
+    background-color: #2e2e2e;
+    padding: 20px 50px;
+    border-bottom: none; /* No border for header */
+}
+
+/* Base Heading H1 Styles */
+h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #f0f0f0;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: left; /* Default text-align for most pages */
+}
+
+/* Horizontal Line style (Utility Class) */
+.horizontal-line {
+    width: 100%;
+    height: 1px;
+    background-color: transparent;
+    border-bottom: 1px solid #4a4a4a;
+    margin-bottom: 25px; /* Default spacing */
+}
+
+/* Base Button Styling */
+.btn {
+    display: inline-block;
+    padding: 12px 25px; /* Default padding for buttons */
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+    min-width: 150px; /* Standard minimum width */
+    box-sizing: border-box; /* Ensure padding and border don't increase overall size */
+}
+
+/* Utility Class: Primary Button */
+.btn-primary {
+    background: linear-gradient(135deg, #f26225 0%, #d15620 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(242, 98, 37, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #d15620 0%, #f26225 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(242, 98, 37, 0.5);
+}
+
+/* Utility Class: Secondary Button (e.g., Delete/Add Question) */
+.btn-secondary {
+    background-color: #FFFFFF; /* White background */
+    color: #f26225; /* Orange text */
+    font-weight: bold;
+    border: 1px solid #f26225; /* Orange border */
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    padding: 8px 12px; /* Smaller padding */
+    font-size: 0.9em;
+    min-width: unset; /* Allow it to shrink */
+    width: auto; /* Adjust width to content */
+}
+
+.btn-secondary:hover {
+    background-color: #f26225; /* Orange background on hover */
+    color: #FFFFFF; /* White text on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(242, 98, 37, 0.4);
+}
+
+/* Toast Notification Styles (Utility Class) */
+.toast {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #f26225; /* Background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 50%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+    font-size: 1.1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Show the toast when it's displayed */
+.toast.show {
+    visibility: visible; /* Show the toast */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the toast in and out */
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+
+/* Responsive adjustments for GLOBAL styles */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column; /* Stack header items on small screens */
+        align-items: flex-start;
+        padding: 15px 20px; /* Adjust header padding on mobile */
+    }
+    h1 {
+        font-size: 2em; /* Adjust h1 font size on mobile */
+        margin-bottom: 10px; /* Add margin below h1 in header on mobile */
+    }
+    .horizontal-line {
+        margin-bottom: 15px; /* Adjust horizontal line margin on mobile */
+    }
+    .btn {
+        padding: 10px 15px; /* Adjust button padding on mobile */
+        font-size: 0.9em; /* Adjust button font size on mobile */
+        min-width: unset; /* Remove min-width on mobile to allow full width */
+    }
+    .btn-secondary {
+        padding: 6px 10px; /* Smaller padding for secondary buttons on mobile */
+        font-size: 0.8em;
+    }
+}

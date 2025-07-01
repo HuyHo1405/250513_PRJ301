@@ -1,0 +1,247 @@
+/* exam-management.css */
+
+/* Specific body layout for exam management page (inherits most from base.css) */
+body {
+    /* No additional body styles needed here as base.css covers it */
+}
+
+/* Styles for Search and Add Exam Section */
+.search-add-container {
+    display: flex;
+    justify-content: space-between; /* Push search group and add button group to opposite ends */
+    align-items: center;
+    width: calc(100% - 100px); /* Align with header padding */
+    margin-left: 50px; /* Align with header */
+    margin-bottom: 25px; /* Space before the table */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px; /* Gap between search group and add button group */
+}
+
+.search-group { /* Group for search elements */
+    display: flex;
+    gap: 15px; /* Gap between elements within the search group */
+    align-items: center;
+    flex-wrap: wrap; /* Allow elements to wrap if space is limited */
+}
+
+.add-exam-group { /* Container for Add Exam button */
+    /* Flexbox handles positioning */
+}
+
+.search-add-container input[type="text"],
+.search-add-container select {
+    padding: 10px 15px;
+    font-size: 1em;
+    background-color: #2e2e2e; /* Dark background */
+    color: #f0f0f0; /* Light text */
+    border: 1px solid #4a4a4a; /* Border */
+    border-radius: 0; /* Square corners */
+    min-width: 150px; /* Minimum width */
+    outline: none; /* Remove outline on focus */
+    transition: border-color 0.3s ease;
+}
+
+.search-add-container input[type="text"]:focus,
+.search-add-container select:focus {
+    border-color: #f26225; /* Change border color on focus */
+}
+
+.search-add-container select {
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23f0f0f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px; /* Space for the arrow */
+}
+
+.search-add-container input::placeholder {
+    color: #888; /* Placeholder text color */
+}
+
+/* Styles for the Table Wrapper */
+.table-wrapper {
+    width: 100%;
+    max-width: calc(100% - 100px); /* Align with other blocks */
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 0; /* Stick to horizontal-line or block above */
+    margin-bottom: 25px; /* Space from table to Back button */
+    background-color: transparent; /* Transparent background */
+    padding: 0; /* Set padding to 0 so table sticks to div edges, cell padding will define spacing */
+}
+
+/* Table Specific Styles */
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse; /* Collapse cell borders */
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    padding: 12px 15px; /* Inner cell padding */
+    border: 1px solid #4a4a4a; /* Keep border for table cells */
+    text-align: left;
+}
+
+.table-wrapper thead th {
+    background-color: #2e2e2e; /* Darker background for table headers */
+    color: #f0f0f0; /* Light text for headers */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table-wrapper tbody tr {
+    background-color: #1a1a1a; /* Background for table rows */
+    color: #ccc; /* Slightly dimmer text for content */
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #1e1e1e; /* Slightly different background for even rows */
+}
+
+/* Button Styling (inherits most from base.css) */
+.btn {
+    /* Padding, font-size, min-width, etc., are handled by base.css */
+}
+
+/* Style for Add Exam button */
+.btn-add-exam {
+    background-color: #FFFFFF; /* White background */
+    color: #f26225; /* Orange text */
+    font-weight: bold;
+    border: 1px solid #f26225; /* Orange border */
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    padding: 10px 15px; /* Match padding of search inputs/buttons */
+    font-size: 1em; /* Match font-size of search inputs/buttons */
+    min-width: unset; /* Remove min-width override from .btn */
+}
+
+.btn-add-exam:hover {
+    background-color: #f26225; /* Orange background on hover */
+    color: #FFFFFF; /* White text on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(242, 98, 37, 0.5);
+}
+
+/* Small button style for table actions (e.g., Take the Test) */
+.btn-small {
+    padding: 10px 15px;
+    font-size: 1em;
+    min-width: unset; /* Override min-width from .btn */
+}
+
+/* Style for Edit button (full width and similar to Add Exam) */
+.btn-edit-full-width {
+    display: block; /* Make it full width */
+    width: 100%; /* Ensure it takes 100% width of its cell */
+    margin-bottom: 10px; /* Space from button below */
+    box-sizing: border-box; /* Include padding and border in width */
+
+    background-color: #FFFFFF; /* White background */
+    color: #f26225; /* Orange text */
+    font-weight: bold;
+    border: 1px solid #f26225; /* Orange border */
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-edit-full-width:hover {
+    background-color: #f26225; /* Orange background on hover */
+    color: #FFFFFF; /* White text on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(242, 98, 37, 0.5);
+}
+
+/* Adjust .btn-search to match input/select height */
+.btn-search {
+    padding: 10px 15px; /* Match padding of input/select */
+    font-size: 1em; /* Match font-size of input/select */
+    min-width: unset; /* Ensure it's not restricted by .btn's min-width */
+}
+
+/* Specific styling for table action forms */
+.table-wrapper td form {
+    display: block; /* Force each form on a new line */
+    margin-bottom: 0; /* Remove default extra bottom margin */
+    /* No need for margin-right when using display: block */
+}
+
+/* Styling for the Back button form */
+.back-button-form {
+    margin-left: 50px;
+    margin-top: 0; /* Stick to table-wrapper block */
+    margin-bottom: 25px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Header and H1 responsive adjustments are now in base.css */
+    /* Horizontal line responsive adjustments are now in base.css */
+
+    /* Responsive for search and add section */
+    .search-add-container {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+        flex-direction: column; /* Stack elements vertically on small screens */
+        align-items: stretch; /* Stretch elements to full width */
+        gap: 15px; /* Larger gap when stacked */
+    }
+    .search-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        width: 100%; /* Ensure search group takes full width */
+    }
+
+    .search-add-container input[type="text"],
+    .search-add-container select,
+    .search-add-container .btn-search, /* Apply to button within search-add-container */
+    .add-exam-group .btn-add-exam { /* Ensure Add Exam button is also full width */
+        width: 100%; /* Take full width */
+        min-width: unset;
+    }
+
+    .add-exam-group { /* Stretch Add Exam button on mobile */
+        width: 100%;
+    }
+
+    .table-wrapper {
+        max-width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    /* Small button responsiveness: Ensure stacking on small screens */
+    .btn-small,
+    .btn-edit-full-width { /* Both action buttons full width on mobile */
+        padding: 8px 12px;
+        font-size: 0.9em;
+        width: 100%; /* Ensure action buttons are also full width on mobile */
+        margin-bottom: 5px; /* Spacing when stacked on mobile */
+        margin-right: 0; /* No need for margin-right when stacked */
+    }
+    .table-wrapper td form:last-child .btn-small { /* Remove bottom margin for the last button */
+        margin-bottom: 0;
+    }
+
+    .back-button-form {
+        margin-left: 20px;
+        margin-bottom: 15px;
+    }
+
+    /* Ensure general buttons on mobile also resize */
+    .btn {
+        /* font-size, padding, width, min-width are handled by base.css */
+    }
+}

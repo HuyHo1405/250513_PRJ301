@@ -1,0 +1,93 @@
+/* result.css */
+
+/* Header Container specific for result page (adjusts padding/alignment) */
+.header-container {
+    display: flex;
+    justify-content: flex-start; /* Giống exam-category, khác welcome */
+    align-items: center;
+    width: 100%;
+    background-color: #2e2e2e;
+    padding: 20px 50px;
+    border-bottom: none;
+}
+
+/* Result Box Styling */
+.result-box {
+    width: calc(100% - 100px); /* Căn chỉnh với padding của header */
+    margin-left: 50px;
+    margin-bottom: 50px; /* Khoảng cách từ dưới trang */
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 5px; /* Có border-radius, khác với các khối khác */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.result-box h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #f26225;
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.result-box p {
+    font-size: 1.1em;
+    margin: 0;
+    line-height: 1.6;
+    color: #d0d0d0;
+    display: flex; /* Sử dụng flex để căn chỉnh nhãn và giá trị */
+    gap: 5px;
+}
+
+.result-box p strong {
+    color: #f0f0f0;
+}
+
+.highlight {
+    color: #f26225;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Button styling for result page (adjusts margin-top, can be full-width) */
+.btn {
+    margin-top: 20px; /* Space above the button */
+    /* responsive styles from base.css will be applied */
+    /* additional responsive for width on mobile */
+
+}
+@media (max-width: 768px) {
+    width: 100%; /* Make button full width on small screens */
+}
+
+/* Responsive Adjustments for Result page components */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 15px 20px;
+    }
+    .result-box {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        padding: 20px;
+        margin-bottom: 20px; /* Adjust margin bottom for mobile */
+    }
+    .result-box h2 {
+        font-size: 1.8em;
+    }
+    .result-box p {
+        font-size: 1em;
+    }
+    .highlight {
+        font-size: 1.1em;
+    }
+    /* .btn responsive styles are largely handled by base.css now */
+}

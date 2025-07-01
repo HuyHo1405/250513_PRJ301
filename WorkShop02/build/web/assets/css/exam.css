@@ -1,0 +1,147 @@
+/* exam.css */
+
+/* Specific body layout for exam page (inherits most from base.css) */
+body {
+    /* No additional body styles needed here as base.css covers it */
+}
+
+/* Header Container (adjusted padding from base) */
+.header-container {
+    /* Inherits from base.css. No specific overrides needed here unless different from base. */
+}
+
+/* H1 specific for exam page (inherits most from base.css) */
+h1 {
+    /* No specific overrides needed here as base.css covers it */
+}
+
+/* Horizontal Line (specific margin from base) */
+.horizontal-line {
+    /* No specific overrides needed here as base.css covers it */
+}
+
+/* Form Container */
+.form-container {
+    width: calc(100% - 100px); /* Align with header padding */
+    margin-left: 50px;
+    margin-bottom: 25px; /* Space from page-bottom-actions */
+    background-color: #2e2e2e;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Question Block Styling */
+.question-block {
+    background-color: #1e1e1e;
+    border: 1px solid #4a4a4a;
+    padding: 20px;
+    margin-bottom: 20px; /* Margin between question blocks */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.question-block:last-of-type {
+    margin-bottom: 0; /* No margin after the last question block */
+}
+
+.question-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #f26225;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4a4a4a;
+}
+
+.option {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.option input[type="radio"] {
+    margin-right: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #f26225;
+    border-radius: 50%;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.option input[type="radio"]:checked {
+    background-color: #f26225;
+    border-color: #f26225;
+    box-shadow: 0 0 0 3px rgba(242, 98, 37, 0.3);
+}
+
+.option input[type="radio"]:focus {
+    box-shadow: 0 0 0 3px rgba(242, 98, 37, 0.5);
+}
+
+.option label {
+    cursor: pointer;
+    color: #f0f0f0;
+    font-size: 1.05em;
+    line-height: 1.4;
+}
+
+/* Button Styling (inherits from base, but with specific margin) */
+.btn {
+    /* Padding, font-size, min-width, etc., are handled by base.css */
+}
+
+/* New container for buttons at the very bottom of the page */
+.page-bottom-actions {
+    width: calc(100% - 100px); /* Match form-container width */
+    margin-left: 50px;
+    margin-top: 30px; /* Space from the form */
+    margin-bottom: 50px; /* Space from bottom of page */
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 15px; /* Gap between buttons */
+}
+
+.page-bottom-actions .btn {
+    /* min-width: 150px; inherits from base.css */
+    /* No specific min-width override needed here, unless you want them different */
+}
+
+/* Responsive Adjustments for exam page components */
+@media (max-width: 768px) {
+    /* Header and H1 responsive adjustments are now in base.css */
+    /* Horizontal line responsive adjustments are now in base.css */
+
+    .form-container {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        padding: 20px;
+    }
+    .question-title {
+        font-size: 1.1em;
+    }
+    .option {
+        font-size: 0.95em;
+    }
+    /* .btn responsive styles are largely handled by base.css now */
+    .page-bottom-actions {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .page-bottom-actions .btn {
+        width: 100%; /* Make buttons full width on small screens */
+    }
+}

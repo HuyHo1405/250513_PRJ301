@@ -1,0 +1,306 @@
+/* Styles specific to the Exam Form page */
+
+/* Form Container */
+.form-container {
+    width: calc(100% - 100px); /* Align with header */
+    margin-left: 50px;
+    margin-bottom: 25px;
+    background-color: #2e2e2e; /* Form background */
+    padding: 30px;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex; /* Use flexbox for form-container */
+    flex-direction: column; /* Stack child elements */
+    gap: 20px; /* Space between sections in the form */
+}
+
+/* Sticky Action Bar within the form */
+.sticky-action-bar {
+    position: sticky;
+    top: 0; /* Sticks to the top of the form-container */
+    /* Compensate for 30px padding on each side of form-container */
+    width: calc(100% + 60px);
+    margin: -30px -30px 20px -30px; /* Compensate for form-container padding and add bottom margin */
+    background-color: #1a1a1a; /* Background matches body */
+    padding: 0; /* No padding directly on this bar */
+    border: none; /* No border */
+    z-index: 100; /* Ensure it's always on top of other content */
+    display: flex;
+    justify-content: space-between; /* Push buttons to both ends */
+    align-items: center; /* Vertically center buttons */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Light shadow */
+}
+
+/* Adjustments for buttons inside the sticky action bar */
+.sticky-action-bar .btn {
+    margin: 0; /* Remove default button margins */
+    padding: 5px 15px; /* Smaller padding for these specific buttons */
+    font-size: 0.8em; /* Smaller font size */
+    min-width: auto; /* Allow auto-sizing */
+    width: auto; /* Auto adjust width */
+    border-radius: 0; /* Square corners */
+    height: auto; /* Auto height based on padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form Layout for input fields */
+.form-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between input rows */
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 20px; /* Space between columns in a row */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allow input groups to expand */
+}
+
+.form-group.full-width {
+    width: 100%;
+}
+
+.form-row.four-columns .form-group {
+    flex-basis: calc(25% - 15px); /* 25% width - half of gap on both sides (20px / 4 columns = 5px per gap edge) */
+    min-width: 150px; /* Ensure it's not too small */
+}
+
+/* Styles for form labels */
+.form-container label {
+    color: #f0f0f0;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; /* Ensure label is above input */
+}
+
+/* Styles for form inputs and selects */
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    padding: 12px 15px;
+    font-size: 1em;
+    background-color: #1a1a1a; /* Dark input background */
+    color: #f0f0f0; /* Light text */
+    border: 1px solid #4a4a4a; /* Border */
+    border-radius: 0; /* Square corners */
+    width: 100%; /* Take full width of container */
+    outline: none; /* Remove outline on focus */
+    transition: border-color 0.3s ease;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus,
+.form-container select:focus {
+    border-color: #f26225; /* Change border color on focus */
+}
+
+/* Custom dropdown arrow for selects */
+.form-container select {
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23f0f0f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom dropdown arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px; /* Space for the arrow */
+}
+
+/* Placeholder text color */
+.form-container input::placeholder {
+    color: #888;
+}
+
+/* Question Section Styling */
+h3 {
+    color: #f26225;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8em;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #4a4a4a;
+    padding-bottom: 10px;
+}
+
+.question-table {
+    margin-bottom: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1e1e1e; /* Question background */
+    border: 1px solid #4a4a4a;
+}
+
+.question-table td {
+    padding: 10px 15px;
+    border: 1px solid #4a4a4a;
+    vertical-align: top;
+}
+
+.question-table td[colspan="4"] {
+    border-bottom: 1px solid #4a4a4a;
+}
+
+.question-table .spacer-col {
+    border: none; /* Remove border for separator column */
+    width: 10px; /* Small width for separator column */
+}
+
+.question-table label {
+    font-weight: bold;
+    color: #f0f0f0;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.question-table input[type="text"] {
+    width: 100%; /* Adjust width to account for padding */
+    padding: 8px 10px;
+    font-size: 0.95em;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border: 1px solid #4a4a4a;
+    border-radius: 0;
+    outline: none;
+}
+
+.question-table select {
+    padding: 8px 10px;
+    font-size: 0.95em;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    border: 1px solid #4a4a4a;
+    border-radius: 0;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23f0f0f0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 25px;
+    outline: none;
+}
+
+/* Specific style for + Add Question button */
+.btn-add-question {
+    width: 100%; /* Make it span the full width available */
+    margin-top: 10px; /* Add some space above it */
+    margin-bottom: 20px; /* Add some space below it, to separate from any subsequent content */
+    min-width: unset; /* Allow it to fully expand */
+}
+
+/* Generic form button group */
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.form-buttons .btn {
+    flex-grow: 1; /* Allow buttons to expand */
+}
+
+/* Container for buttons at the very bottom of the page */
+.page-bottom-actions {
+    width: calc(100% - 100px); /* Match form-container width */
+    margin-left: 50px;
+    margin-top: 30px; /* Space from the form */
+    margin-bottom: 50px; /* Space from bottom of page */
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 15px; /* Gap between buttons */
+}
+
+.page-bottom-actions .btn {
+    min-width: 150px; /* Ensure they have a decent size */
+}
+
+
+/* Responsive adjustments for Exam Form page specific styles */
+@media (max-width: 992px) {
+    .form-row.four-columns .form-group {
+        flex-basis: calc(50% - 10px); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        padding: 20px;
+    }
+
+    .sticky-action-bar {
+        width: calc(100% + 40px); /* Compensate for 20px padding on each side of form-container */
+        margin: -20px -20px 20px -20px; /* Compensate for form-container padding */
+        padding: 0; /* No padding directly on this bar */
+    }
+
+    .sticky-action-bar .btn {
+        padding: 5px 10px; /* Smaller padding on mobile */
+        font-size: 0.75em; /* Even smaller font size */
+        height: auto; /* Auto height */
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="number"],
+    .form-container select {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+
+    .form-row {
+        flex-direction: column; /* Stack columns on small screens */
+        gap: 15px;
+    }
+
+    .form-row .form-group {
+        width: 100%; /* Take full width */
+        flex-basis: auto; /* Remove flex-basis */
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    .question-table td {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    .question-table input[type="text"],
+    .question-table select {
+        padding: 6px 8px;
+        font-size: 0.85em;
+    }
+
+    .btn-add-question {
+        margin-top: 8px;
+        margin-bottom: 15px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form-buttons .btn {
+        width: 100%;
+    }
+
+    .page-bottom-actions {
+        width: calc(100% - 40px); /* Match form-container width on mobile */
+        margin-left: 20px;
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        gap: 10px;
+    }
+    .page-bottom-actions .btn {
+        width: 100%; /* Full width when stacked */
+    }
+}
